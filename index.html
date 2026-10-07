@@ -18,8 +18,95 @@
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/vendor.css">
     <link rel="stylesheet" href="css/main.css">
-    <!-- NEW: styles for the Featured Project section (must come after main.css) -->
-    <link rel="stylesheet" href="css/projects.css">
+    <!-- Flagship project styles (kept in the page so they always load) -->
+    <style>
+        section.s-projects {
+            --p-bg: #070707;
+            --p-card: #101010;
+            --p-line: #262626;
+            --p-text: #b9b9b9;
+            --p-white: #f4f4f4;
+            --p-gold: #d9a93a;
+            background: var(--p-bg);
+            color: var(--p-text);
+            padding: 12rem 0;
+            position: relative;
+        }
+        section.s-projects .proj-wrap { max-width: 1140px; margin: 0 auto; padding: 0 3rem; }
+        section.s-projects p, section.s-projects li, section.s-projects dd { color: var(--p-text); line-height: 1.75; }
+        section.s-projects h2, section.s-projects h3, section.s-projects h4, section.s-projects dt { color: var(--p-white); }
+
+        /* heading */
+        section.s-projects .proj-head { text-align: center; max-width: 820px; margin: 0 auto 6rem; }
+        section.s-projects .proj-kicker { color: var(--p-gold); letter-spacing: .3em; text-transform: uppercase; font-size: 1.3rem; margin-bottom: 1.6rem; }
+        section.s-projects .proj-title { font-size: clamp(3.2rem, 6vw, 5.6rem); line-height: 1.15; margin: 0 0 2.4rem; }
+        section.s-projects .proj-title::after { content: ""; display: block; width: 8rem; height: 2px; background: var(--p-gold); margin: 2.8rem auto 0; }
+        section.s-projects .proj-lead { font-size: 1.9rem; }
+
+        /* picture slots */
+        section.s-projects .proj-media { margin: 0; border: 1px solid var(--p-line); border-radius: 12px; overflow: hidden; background: var(--p-card); }
+        section.s-projects .proj-media img { display: block; width: 100%; height: auto; }
+        section.s-projects .proj-media.is-empty { aspect-ratio: 16 / 10; display: flex; align-items: center; justify-content: center; border: 2px dashed #3a3a3a; }
+        section.s-projects .proj-media.is-empty img { display: none; }
+        section.s-projects .proj-media.is-empty::before { content: attr(data-label); color: #777; font-size: 1.5rem; text-align: center; padding: 2rem; }
+        section.s-projects .proj-media--hero { margin-bottom: 4rem; box-shadow: 0 30px 80px rgba(217, 169, 58, .08); }
+        section.s-projects .proj-media--hero.is-empty { aspect-ratio: 16 / 9; }
+
+        /* facts */
+        section.s-projects .proj-facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.4rem; margin: 0 0 8rem; padding: 3rem 0; border-top: 1px solid var(--p-line); border-bottom: 1px solid var(--p-line); }
+        section.s-projects .proj-facts dt { font-size: 1.3rem; letter-spacing: .15em; text-transform: uppercase; color: var(--p-gold); margin-bottom: .6rem; }
+        section.s-projects .proj-facts dd { margin: 0; font-size: 1.5rem; line-height: 1.5; }
+
+        /* blocks */
+        section.s-projects .proj-block { margin-bottom: 8rem; }
+        section.s-projects .proj-block--two { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
+        section.s-projects .proj-h3 { font-size: 2.8rem; margin: 0 0 2rem; }
+        section.s-projects .proj-intro { max-width: 640px; margin-bottom: 3rem; }
+
+        /* stages: a real sequence, so numbered */
+        section.s-projects .proj-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; counter-reset: stage; }
+        section.s-projects .proj-steps li { counter-increment: stage; background: var(--p-card); border: 1px solid var(--p-line); border-radius: 12px; padding: 2.6rem 2.4rem; }
+        section.s-projects .proj-steps li::before { content: counter(stage); display: inline-flex; width: 3.4rem; height: 3.4rem; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid var(--p-gold); color: var(--p-gold); font-size: 1.5rem; margin-bottom: 1.4rem; }
+        section.s-projects .proj-steps h4 { font-size: 2rem; margin: 0 0 .8rem; }
+        section.s-projects .proj-steps p { margin: 0; font-size: 1.5rem; }
+
+        /* alternating rows */
+        section.s-projects .proj-row { display: grid; grid-template-columns: 1.3fr 1fr; gap: 5rem; align-items: center; margin-bottom: 8rem; }
+        section.s-projects .proj-row--flip { grid-template-columns: 1fr 1.3fr; }
+        section.s-projects .proj-row--flip .proj-media { order: 2; }
+        section.s-projects .proj-copy h4 { font-size: 2.6rem; margin: 0 0 1.6rem; }
+        section.s-projects .proj-copy ul { list-style: none; margin: 2rem 0 0; padding: 0; }
+        section.s-projects .proj-copy li { position: relative; padding: .6rem 0 .6rem 2.6rem; border-top: 1px solid var(--p-line); font-size: 1.5rem; }
+        section.s-projects .proj-copy li::before { content: ""; position: absolute; left: .2rem; top: 1.45rem; width: 1rem; height: 1px; background: var(--p-gold); }
+
+        /* stats */
+        section.s-projects .proj-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 8rem; text-align: center; }
+        section.s-projects .proj-stats div { padding: 3rem 2rem; border: 1px solid var(--p-line); border-radius: 12px; background: var(--p-card); }
+        section.s-projects .proj-stats strong { display: block; font-size: 5rem; line-height: 1; color: var(--p-gold); margin-bottom: 1rem; }
+        section.s-projects .proj-stats span { font-size: 1.4rem; }
+
+        /* button + tags */
+        section.s-projects .proj-btn { display: inline-block; margin-top: 1.4rem; padding: 1.4rem 3rem; border: 1px solid var(--p-gold); color: var(--p-gold); font-size: 1.3rem; letter-spacing: .2em; text-transform: uppercase; transition: background .2s, color .2s; }
+        section.s-projects .proj-btn:hover, section.s-projects .proj-btn:focus-visible { background: var(--p-gold); color: #000; }
+        section.s-projects .proj-tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+        section.s-projects .proj-tags li { padding: .6rem 1.6rem; border: 1px solid var(--p-line); border-radius: 999px; font-size: 1.3rem; line-height: 1.4; }
+
+        @media screen and (max-width: 900px) {
+            section.s-projects { padding: 8rem 0; }
+            section.s-projects .proj-facts { grid-template-columns: 1fr 1fr; }
+            section.s-projects .proj-block--two,
+            section.s-projects .proj-row,
+            section.s-projects .proj-row--flip { grid-template-columns: 1fr; gap: 3rem; }
+            section.s-projects .proj-row--flip .proj-media { order: 0; }
+            section.s-projects .proj-steps { grid-template-columns: 1fr 1fr; }
+            section.s-projects .proj-stats { grid-template-columns: 1fr; }
+        }
+        @media screen and (max-width: 560px) {
+            section.s-projects .proj-wrap { padding: 0 2rem; }
+            section.s-projects .proj-facts, section.s-projects .proj-steps { grid-template-columns: 1fr; }
+        }
+        @media (prefers-reduced-motion: reduce) { section.s-projects .proj-btn { transition: none; } }
+    </style>
 
     <!-- script
     ================================================== -->
@@ -328,7 +415,7 @@ Currently serving as a MedTech staff and hematology head at Lingap General Hospi
                     <h4 class="item-title">AI-Assisted App Development</h4>
                     <p>
                         Turning real workplace problems into working software. I direct AI tools to build full systems,
-                        like a hospital laboratory management system, from idea to live deployment.
+                        like a hospital laboratory management system, from idea to working software.
                     </p>
                 </div>
             </div>
@@ -584,82 +671,262 @@ Currently serving as a MedTech staff and hematology head at Lingap General Hospi
 
 
     <!-- ============================================================
-         NEW: featured project  (AI-built hospital system)
-         To add another project later, copy one .proj-feature block
-         and change the image, text, tags and links.
+         FLAGSHIP PROJECT: Lingap Bacteriology LIS
+         HOW TO ADD YOUR PHOTOS
+         Every picture slot below is an <img>. Save your screenshot with the
+         file name shown in src="" (inside images/projects/) and it appears
+         automatically. Until then a dashed placeholder is shown.
+         Remember to hide or blur real patient names before you upload.
          ============================================================ -->
     <section id="projects" class="s-projects target-section">
+        <div class="proj-wrap">
 
-        <div class="row heading-block heading-block--center" data-aos="fade-up">
-            <div class="column large-full">
-                <h2 class="section-heading section-heading--centerbottom">Featured Project</h2>
-                <p class="section-desc">
-                    A full hospital laboratory system, designed by a medical technologist and built with the help of AI.
+            <!-- heading -->
+            <header class="proj-head" data-aos="fade-up">
+                <p class="proj-kicker">Flagship Project</p>
+                <h2 class="proj-title">Lingap Bacteriology<br>Laboratory Information System</h2>
+                <p class="proj-lead">
+                    A complete system that follows every bacteriology specimen from the moment it is
+                    registered to the moment its result is verified and released. Designed by a
+                    practicing medical technologist and built with the help of AI.
                 </p>
-            </div>
-        </div> <!-- end heading-block -->
+            </header>
 
-        <div class="row" data-aos="fade-up">
-            <div class="column large-full">
+            <!-- hero image -->
+            <figure class="proj-media proj-media--hero" data-label="Hero image: main dashboard" data-aos="fade-up">
+                <img src="images/projects/lis-hero.jpg" alt="Dashboard of the Lingap Bacteriology Laboratory Information System" onerror="this.parentNode.classList.add('is-empty')">
+            </figure>
 
-                <article class="proj-feature">
+            <!-- quick facts -->
+            <dl class="proj-facts" data-aos="fade-up">
+                <div><dt>Client</dt><dd>Lingap General Hospital, Microbiology &amp; Bacteriology Section</dd></div>
+                <div><dt>My role</dt><dd>Workflow designer, product owner and tester</dd></div>
+                <div><dt>Built with</dt><dd>AI-assisted development</dd></div>
+                <div><dt>Access</dt><dd>Private. Contains patient data, so it is not public</dd></div>
+            </dl>
 
-                    <!-- screenshot: save your screenshot as images/portfolio/lingap-lis.png -->
-                    <a class="proj-shot" href="https://lingapbactelis.lovable.app" target="_blank" rel="noopener"
-                       aria-label="Open the Lingap Bacteriology LIS live demo in a new tab">
-                        <div class="proj-shot__bar" aria-hidden="true">
-                            <i></i><i></i><i></i>
-                            <span>lingapbactelis.lovable.app</span>
-                        </div>
-                        <img src="images/portfolio/lingap-lis.png"
-                             alt="Dashboard of the Lingap General Hospital Bacteriology Laboratory Information System showing section overview, active timers and specimen queue"
-                             loading="lazy">
-                    </a>
-
-                    <div class="proj-info">
-                        <span class="proj-badge">Built with AI &middot; Live system</span>
-                        <h3>Lingap Bacteriology LIS</h3>
-                        <p class="proj-info__sub">Laboratory Information System for the Microbiology &amp; Bacteriology Section</p>
-
-                        <p>
-                            I work in this lab every day, so I built the system around how specimens actually move:
-                            from registration, to incubation, to workup, to verified release. AI tools wrote the code
-                            while I designed the workflow and checked every result against real lab practice.
-                        </p>
-
-                        <ul class="proj-features">
-                            <li>Auto-generated accession numbers, labels, barcodes and QR codes</li>
-                            <li>Specimen tracking: Registered, Incubating, For Workup, For AST, For Verification, Released</li>
-                            <li>Incubation timers and alarms for blood culture readings</li>
-                            <li>Dashboard, queue, reports, scan and admin tools with user roles</li>
-                        </ul>
-
-                        <ul class="proj-tags">
-                            <li class="is-ai">AI-assisted build</li>
-                            <li>Lovable</li>
-                            <li>Web app</li>
-                            <li>Workflow design</li>
-                            <li>Lab informatics</li>
-                        </ul>
-
-                        <div class="proj-actions">
-                            <a href="https://lingapbactelis.lovable.app" target="_blank" rel="noopener" class="proj-btn proj-btn--primary">View live system</a>
-                            <a href="#contact" class="proj-btn proj-btn--ghost smoothscroll">Ask about a build</a>
-                        </div>
-                    </div>
-
-                </article>
-
-                <div class="proj-stats">
-                    <div><strong>6</strong><span>specimen stages tracked</span></div>
-                    <div><strong>7</strong><span>modules, dashboard to admin</span></div>
-                    <div><strong>Live</strong><span>deployed and in use</span></div>
-                    <div><strong>AI</strong><span>built with AI tools</span></div>
+            <!-- overview -->
+            <div class="proj-block proj-block--two" data-aos="fade-up">
+                <div>
+                    <h3 class="proj-h3">What is a bacteriology LIS?</h3>
+                    <p>
+                        A Laboratory Information System (LIS) is the software a hospital laboratory uses to
+                        keep track of patient samples and their results. The bacteriology section has a
+                        harder job than most. A blood culture is not a one-hour test. It is incubated for
+                        days, checked on a schedule, stained, identified, and tested against antibiotics
+                        before a final result can be released.
+                    </p>
+                    <p>
+                        This system is built around that slow, careful process, so nothing is lost between
+                        shifts and every step has a name, a time and a person attached to it.
+                    </p>
                 </div>
-
+                <div>
+                    <h3 class="proj-h3">Why I built it</h3>
+                    <p>
+                        I work in this laboratory every day. I know where specimens wait, where paper
+                        gets lost and which reading is easy to miss at the end of a long shift. I am not a
+                        software engineer, so I used AI tools to turn that experience into working software,
+                        while I decided what the system should do and checked every screen against real
+                        bench practice.
+                    </p>
+                </div>
             </div>
-        </div>
 
+            <!-- specimen journey -->
+            <div class="proj-block" data-aos="fade-up">
+                <h3 class="proj-h3">The specimen journey</h3>
+                <p class="proj-intro">Every specimen moves through the same six stages, and the dashboard always shows which one it is in.</p>
+
+                <ol class="proj-steps">
+                    <li>
+                        <h4>Registered</h4>
+                        <p>The specimen is logged with patient, source and ward. The system creates the accession number, label, barcode and QR code.</p>
+                    </li>
+                    <li>
+                        <h4>Incubating</h4>
+                        <p>Culture bottles go into the automated incubator. Timers count down to the next reading and raise an alarm when one is due.</p>
+                    </li>
+                    <li>
+                        <h4>For Workup</h4>
+                        <p>Growth is examined. Gram stain findings are recorded and the organism is worked up for identification.</p>
+                    </li>
+                    <li>
+                        <h4>For AST</h4>
+                        <p>Antimicrobial susceptibility testing shows which antibiotics work against the organism.</p>
+                    </li>
+                    <li>
+                        <h4>For Verification</h4>
+                        <p>A second set of eyes reviews everything. Nothing leaves the laboratory unchecked.</p>
+                    </li>
+                    <li>
+                        <h4>Released</h4>
+                        <p>The verified result is released and the record is closed, with the full history kept.</p>
+                    </li>
+                </ol>
+            </div>
+
+            <!-- feature showcases -->
+            <div class="proj-block" data-aos="fade-up">
+                <h3 class="proj-h3">Inside the system</h3>
+            </div>
+
+            <!-- 1 dashboard -->
+            <article class="proj-row" data-aos="fade-up">
+                <figure class="proj-media" data-label="Screenshot: dashboard">
+                    <img src="images/projects/lis-dashboard.jpg" alt="Section overview, active specimen and specimen queue" onerror="this.parentNode.classList.add('is-empty')">
+                </figure>
+                <div class="proj-copy">
+                    <h4>A dashboard for the whole section</h4>
+                    <p>
+                        The first screen answers the questions a bench technologist asks every morning: how
+                        many specimens are pending, how many are incubating, whether any alarms are active and
+                        what was released today.
+                    </p>
+                    <ul>
+                        <li>Live counts for pending, incubating and awaiting verification</li>
+                        <li>An active specimen panel with its current stage, Gram stain and incubation status</li>
+                        <li>A specimen queue with a single button to continue the next step</li>
+                    </ul>
+                </div>
+            </article>
+
+            <!-- 2 registration -->
+            <article class="proj-row proj-row--flip" data-aos="fade-up">
+                <figure class="proj-media" data-label="Screenshot: registration and label">
+                    <img src="images/projects/lis-register.jpg" alt="Specimen registration and generated label" onerror="this.parentNode.classList.add('is-empty')">
+                </figure>
+                <div class="proj-copy">
+                    <h4>Registration with automatic labels</h4>
+                    <p>
+                        Registering a specimen takes one form. The accession number, label, barcode and QR code
+                        are generated automatically, which removes handwriting and typing errors at the very
+                        start of the process.
+                    </p>
+                    <ul>
+                        <li>Unique accession numbers in a consistent format</li>
+                        <li>Printable labels with barcode and QR code</li>
+                        <li>Scan station to pull up a specimen in seconds</li>
+                    </ul>
+                </div>
+            </article>
+
+            <!-- 3 incubation -->
+            <article class="proj-row" data-aos="fade-up">
+                <figure class="proj-media" data-label="Screenshot: incubation timers">
+                    <img src="images/projects/lis-incubation.jpg" alt="Active incubation timers and alarms" onerror="this.parentNode.classList.add('is-empty')">
+                </figure>
+                <div class="proj-copy">
+                    <h4>Incubation timers that do not forget</h4>
+                    <p>
+                        Cultures are incubated in the automated blood culture system at 35 to 37 &deg;C.
+                        Each bottle has its own timer, due date and countdown, so the next reading is never a
+                        matter of memory.
+                    </p>
+                    <ul>
+                        <li>Active timers listed by time remaining</li>
+                        <li>Due dates and times for final incubation</li>
+                        <li>Alarms when a reading is overdue</li>
+                    </ul>
+                </div>
+            </article>
+
+            <!-- 4 workup -->
+            <article class="proj-row proj-row--flip" data-aos="fade-up">
+                <figure class="proj-media" data-label="Screenshot: specimen record / workup">
+                    <img src="images/projects/lis-workup.jpg" alt="Specimen record with Gram stain, identification and susceptibility results" onerror="this.parentNode.classList.add('is-empty')">
+                </figure>
+                <div class="proj-copy">
+                    <h4>One record for every specimen</h4>
+                    <p>
+                        Each specimen has a single record that gathers its Gram stain, identification and
+                        susceptibility results in one place, with the stage it is in always visible at the top.
+                    </p>
+                    <ul>
+                        <li>Gram stain recording</li>
+                        <li>Organism identification and AST results</li>
+                        <li>Complete history of who did what and when</li>
+                    </ul>
+                </div>
+            </article>
+
+            <!-- 5 verification and reports -->
+            <article class="proj-row" data-aos="fade-up">
+                <figure class="proj-media" data-label="Screenshot: verification and reports">
+                    <img src="images/projects/lis-reports.jpg" alt="Verification queue and reports" onerror="this.parentNode.classList.add('is-empty')">
+                </figure>
+                <div class="proj-copy">
+                    <h4>Verification and reports</h4>
+                    <p>
+                        Results wait in a verification queue until they are reviewed. Once released, the
+                        reports module collects the numbers a section head needs.
+                    </p>
+                    <ul>
+                        <li>A clear queue of results awaiting review</li>
+                        <li>Reports for released and registered specimens</li>
+                        <li>Fewer loose papers and fewer repeated questions</li>
+                    </ul>
+                </div>
+            </article>
+
+            <!-- 6 admin -->
+            <article class="proj-row proj-row--flip" data-aos="fade-up">
+                <figure class="proj-media" data-label="Screenshot: admin and user roles">
+                    <img src="images/projects/lis-admin.jpg" alt="Admin area with users and roles" onerror="this.parentNode.classList.add('is-empty')">
+                </figure>
+                <div class="proj-copy">
+                    <h4>Accounts and roles</h4>
+                    <p>
+                        Staff sign in with their own accounts, and what they can do depends on their role.
+                        Administrators manage users and settings from a separate area.
+                    </p>
+                    <ul>
+                        <li>Individual sign-in for every staff member</li>
+                        <li>Role-based access, with an Administrator area</li>
+                        <li>Global search by accession number or patient</li>
+                    </ul>
+                </div>
+            </article>
+
+            <!-- numbers -->
+            <div class="proj-stats" data-aos="fade-up">
+                <div><strong>6</strong><span>specimen stages tracked</span></div>
+                <div><strong>7</strong><span>modules, from dashboard to admin</span></div>
+                <div><strong>4</strong><span>codes generated per specimen: accession, label, barcode, QR</span></div>
+            </div>
+
+            <!-- built with AI -->
+            <div class="proj-block proj-block--two" data-aos="fade-up">
+                <div>
+                    <h3 class="proj-h3">How AI helped</h3>
+                    <p>
+                        AI wrote the code. I wrote the requirements. I described each screen the way a
+                        technologist would, tested it against real specimen scenarios, and sent it back until
+                        it matched how the bench actually works. The result is software shaped by someone who
+                        uses it, not a generic template.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="proj-h3">Privacy first</h3>
+                    <p>
+                        Because this system handles real patient information, it is not open to the public
+                        and the screenshots here are limited. If you would like to see how it works, I am
+                        happy to walk you through a demonstration with sample data.
+                    </p>
+                    <a href="#contact" class="proj-btn smoothscroll">Request a walkthrough</a>
+                </div>
+            </div>
+
+            <ul class="proj-tags" data-aos="fade-up">
+                <li>AI-assisted build</li>
+                <li>Workflow design</li>
+                <li>Laboratory informatics</li>
+                <li>Bacteriology</li>
+                <li>Barcode and QR labels</li>
+                <li>Role-based access</li>
+            </ul>
+
+        </div>
     </section> <!-- end s-projects -->
 
 
