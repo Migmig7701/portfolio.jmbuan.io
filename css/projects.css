@@ -1,0 +1,269 @@
+/* ==========================================================
+   projects.css  -  Featured Project section
+   Load AFTER css/main.css. All classes are prefixed "proj-"
+   so nothing in your existing template is overridden.
+   ========================================================== */
+
+.s-projects {
+    --proj-green: #2f6b4a;
+    --proj-green-dark: #234f37;
+    --proj-green-soft: #e4f0e8;
+    --proj-ink: #1d2a24;
+    --proj-muted: #5d6b64;
+    --proj-line: #dde5e0;
+    --proj-bg: #f5f8f6;
+    --proj-card: #ffffff;
+    background: var(--proj-bg);
+    padding-top: 12rem;
+    padding-bottom: 12rem;
+    color: var(--proj-ink);
+}
+
+.s-projects .section-desc {
+    color: var(--proj-muted);
+}
+
+/* ---------- Featured card ---------- */
+.proj-feature {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: 4.8rem;
+    align-items: center;
+    background: var(--proj-card);
+    border: 1px solid var(--proj-line);
+    border-radius: 20px;
+    padding: 4rem;
+    box-shadow: 0 18px 50px rgba(35, 79, 55, .10);
+}
+
+/* Screenshot in a browser-style frame */
+.proj-shot {
+    display: block;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--proj-line);
+    background: #fff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .12);
+    transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.proj-shot:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, .16);
+}
+
+.proj-shot__bar {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .9rem 1.2rem;
+    background: #eef2f0;
+    border-bottom: 1px solid var(--proj-line);
+}
+
+.proj-shot__bar i {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background: #c9d3ce;
+}
+
+.proj-shot__bar i:nth-child(1) { background: #ff6058; }
+.proj-shot__bar i:nth-child(2) { background: #ffc130; }
+.proj-shot__bar i:nth-child(3) { background: #27c93f; }
+
+.proj-shot__bar span {
+    margin-left: 1rem;
+    font-size: 1.2rem;
+    color: var(--proj-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.proj-shot img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* ---------- Text side ---------- */
+.proj-info h3 {
+    font-size: 3.2rem;
+    line-height: 1.2;
+    margin: 0 0 .8rem;
+    color: var(--proj-ink);
+}
+
+.proj-info__sub {
+    margin: 0 0 2rem;
+    font-size: 1.5rem;
+    color: var(--proj-green);
+    font-weight: 600;
+}
+
+.proj-info p {
+    color: var(--proj-muted);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+.proj-badge {
+    display: inline-block;
+    margin-bottom: 1.6rem;
+    padding: .5rem 1.4rem;
+    border-radius: 999px;
+    background: var(--proj-green-soft);
+    color: var(--proj-green-dark);
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.proj-features {
+    list-style: none;
+    margin: 0 0 2.4rem;
+    padding: 0;
+}
+
+.proj-features li {
+    position: relative;
+    padding: .7rem 0 .7rem 2.8rem;
+    color: var(--proj-ink);
+    border-bottom: 1px solid var(--proj-line);
+}
+
+.proj-features li:last-child { border-bottom: 0; }
+
+.proj-features li::before {
+    content: "";
+    position: absolute;
+    left: .4rem;
+    top: 1.15rem;
+    width: .9rem;
+    height: .5rem;
+    border-left: 2px solid var(--proj-green);
+    border-bottom: 2px solid var(--proj-green);
+    transform: rotate(-45deg);
+}
+
+.proj-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .8rem;
+    list-style: none;
+    margin: 0 0 3rem;
+    padding: 0;
+}
+
+.proj-tags li {
+    padding: .5rem 1.2rem;
+    border: 1px solid var(--proj-line);
+    border-radius: 999px;
+    font-size: 1.3rem;
+    color: var(--proj-muted);
+    background: var(--proj-bg);
+}
+
+.proj-tags li.is-ai {
+    background: var(--proj-green);
+    border-color: var(--proj-green);
+    color: #fff;
+}
+
+/* ---------- Buttons ---------- */
+.proj-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+}
+
+.proj-btn {
+    display: inline-block;
+    padding: 1.3rem 2.6rem;
+    border-radius: 999px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    line-height: 1.2;
+    border: 2px solid var(--proj-green);
+    transition: background .2s ease, color .2s ease;
+}
+
+.proj-btn--primary {
+    background: var(--proj-green);
+    color: #fff;
+}
+
+.proj-btn--primary:hover,
+.proj-btn--primary:focus {
+    background: var(--proj-green-dark);
+    border-color: var(--proj-green-dark);
+    color: #fff;
+}
+
+.proj-btn--ghost {
+    background: transparent;
+    color: var(--proj-green);
+}
+
+.proj-btn--ghost:hover,
+.proj-btn--ghost:focus {
+    background: var(--proj-green-soft);
+    color: var(--proj-green-dark);
+}
+
+.proj-btn:focus-visible,
+.proj-shot:focus-visible {
+    outline: 3px solid #7fb598;
+    outline-offset: 3px;
+}
+
+/* ---------- Stats strip ---------- */
+.proj-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 3.6rem;
+    text-align: center;
+}
+
+.proj-stats div {
+    padding: 2.2rem 1rem;
+    background: var(--proj-card);
+    border: 1px solid var(--proj-line);
+    border-radius: 14px;
+}
+
+.proj-stats strong {
+    display: block;
+    font-size: 2.8rem;
+    line-height: 1.1;
+    color: var(--proj-green);
+}
+
+.proj-stats span {
+    font-size: 1.4rem;
+    color: var(--proj-muted);
+}
+
+/* ---------- Responsive ---------- */
+@media screen and (max-width: 1000px) {
+    .proj-feature {
+        grid-template-columns: 1fr;
+        gap: 3.2rem;
+        padding: 2.8rem;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .s-projects { padding-top: 8rem; padding-bottom: 8rem; }
+    .proj-feature { padding: 1.8rem; border-radius: 14px; }
+    .proj-info h3 { font-size: 2.6rem; }
+    .proj-stats { grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+    .proj-actions .proj-btn { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .proj-shot, .proj-btn { transition: none; }
+    .proj-shot:hover { transform: none; }
+}
